@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"网络诊断Demo";
+    self.navigationItem.title = @"Diagnóstico de rede";
 
     _indicatorView = [[UIActivityIndicatorView alloc]
         initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -46,7 +46,7 @@
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [btn.titleLabel setNumberOfLines:2];
-    [btn setTitle:@"开始诊断" forState:UIControlStateNormal];
+    [btn setTitle:@"Iniciar o diagnóstico" forState:UIControlStateNormal];
     [btn addTarget:self
                   action:@selector(startNetDiagnosis)
         forControlEvents:UIControlEventTouchUpInside];
@@ -57,7 +57,7 @@
         [[UITextField alloc] initWithFrame:CGRectMake(130.0f, 79.0f, 180.0f, 50.0f)];
     _txtfield_dormain.delegate = self;
     _txtfield_dormain.returnKeyType = UIReturnKeyDone;
-    _txtfield_dormain.text = @"www.baidu.com";
+    _txtfield_dormain.text = @"upe.poli.br";
     [self.view addSubview:_txtfield_dormain];
 
 
@@ -75,7 +75,7 @@
 
     // Do any additional setup after loading the view, typically from a nib.
     _netDiagnoService = [[LDNetDiagnoService alloc] initWithAppCode:@"test"
-                                                            appName:@"网络诊断应用"
+                                                            appName:@"Poli Traceroute"
                                                          appVersion:@"1.0.0"
                                                              userID:@"huipang@corp.netease.com"
                                                            deviceID:nil
@@ -95,7 +95,7 @@
     _netDiagnoService.dormain = _txtfield_dormain.text;
     if (!_isRunning) {
         [_indicatorView startAnimating];
-        [btn setTitle:@"停止诊断" forState:UIControlStateNormal];
+        [btn setTitle:@"Tracos de Pacs" forState:UIControlStateNormal];
         [btn setBackgroundColor:[UIColor colorWithWhite:0.3 alpha:1.0]];
         [btn setUserInteractionEnabled:FALSE];
         [self performSelector:@selector(delayMethod) withObject:nil afterDelay:3.0f];
@@ -106,7 +106,7 @@
     } else {
         [_indicatorView stopAnimating];
         _isRunning = !_isRunning;
-        [btn setTitle:@"开始诊断" forState:UIControlStateNormal];
+        [btn setTitle:@"Tracos de Pacs" forState:UIControlStateNormal];
         [btn setBackgroundColor:[UIColor colorWithWhite:0.3 alpha:1.0]];
         [btn setUserInteractionEnabled:FALSE];
         [self performSelector:@selector(delayMethod) withObject:nil afterDelay:3.0f];
@@ -130,7 +130,7 @@
 #pragma mark NetDiagnosisDelegate
 - (void)netDiagnosisDidStarted
 {
-    NSLog(@"开始诊断～～～");
+    NSLog(@"Iniciar o diagnóstico～～～");
 }
 
 - (void)netDiagnosisStepInfo:(NSString *)stepInfo
@@ -149,7 +149,7 @@
     //可以保存到文件，也可以通过邮件发送回来
     dispatch_async(dispatch_get_main_queue(), ^{
         [_indicatorView stopAnimating];
-        [btn setTitle:@"开始诊断" forState:UIControlStateNormal];
+        [btn setTitle:@"Iniciar o diagnóstico" forState:UIControlStateNormal];
         _isRunning = NO;
     });
 }
